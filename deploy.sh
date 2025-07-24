@@ -6,7 +6,8 @@ git add .
 git commit -m "Deploying latest changes"
 git push origin main
 
-sleep 5
+ghp-import -c cognician.dev -n -p -f _build/html
+sleep 3
 gh run list --branch gh-pages --limit 1 --json url --jq '.[0].url' | xargs xdg-open
 
 # # Extract repo identifier (e.g. user/repo)
