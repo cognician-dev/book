@@ -5,6 +5,11 @@ title: My sample book
 author: The Jupyter Book Community
 logo: logo.png
 
+html:
+  extra_css:
+    - theme.css
+
+
 # Exclude draft/sample notebooks from the build
 exclude_patterns:
   - 'drafts/*'
