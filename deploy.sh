@@ -27,15 +27,16 @@ echo "Latest pre-deploy run ID: $BASE_RUN_ID"
 # Deploy the site
 ghp-import -c cognician.dev -n -p -f _build/html
 
-echo "Waiting for the new deployment run to appear..."
+echo -n "Waiting for the new deployment run to appear."
 
 # Poll until a new run is detected
 NEW_RUN_ID="$BASE_RUN_ID"
 while [ "$NEW_RUN_ID" == "$BASE_RUN_ID" ] || [ "$NEW_RUN_ID" == "null" ]; do
-  sleep 3
+  sleep 1
   NEW_RUN_ID=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq '.workflow_runs[0].id')
-  echo "Current run ID: $NEW_RUN_ID"
+  echo -n "."
 done
+echo ""
 
 # Fetch and open the new run's URL
 LATEST_RUN_URL=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq -r '.workflow_runs[0].html_url')
