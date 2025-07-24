@@ -28,6 +28,7 @@ fi
 LATEST_RUN_URL=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq -r '.workflow_runs[0].html_url')
 
 if [ "$LATEST_RUN_URL" != "null" ]; then
+  echo "Opening the latest workflow run: $LATEST_RUN_URL"
   xdg-open "$LATEST_RUN_URL"  # or `open` on macOS
 else
   echo "❌ No workflow runs found."
