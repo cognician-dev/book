@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Deploying the latest changes to the remote repository..."
+
 git add .
 git commit -m "Deploying latest changes"
 git push origin main
@@ -12,3 +14,5 @@ echo "Waiting a moment for the deployment to kick off..."
 # Open the GitHub Actions page for the repository
 xdg-open "$(git remote get-url origin | sed -E 's#(git@|https://)([^:/]+)[:/]([^/]+)/([^.]+)(\.git)?#https://\2/\3/\4/actions#')"
 # gh repo view --branch gh-pages --web
+
+echo "Done."
