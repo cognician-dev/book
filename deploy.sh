@@ -59,4 +59,5 @@ if [ "$LATEST_RUN_URL" != "null" ]; then
   xdg-open "$LATEST_RUN_URL"  # or `open` on macOS
 else
   echo "❌ No new workflow run found."
+  gh run list --branch gh-pages --limit 1 --json url --jq '.[0].url' | xargs xdg-open
 fi
