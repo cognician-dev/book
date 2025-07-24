@@ -4,4 +4,4 @@ git add .
 git commit -m "Deploying latest changes"
 git push origin main
 
-ghp-import -n -p -f _build/html
+ghp-import -c cognician.dev -n -p -f _build/html
