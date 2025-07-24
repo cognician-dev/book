@@ -16,6 +16,7 @@ API_URL="https://api.github.com/repos/$REPO/actions/runs"
 AUTH_HEADER=""
 if [ -n "$GITHUB_TOKEN" ]; then
   AUTH_HEADER="Authorization: token $GITHUB_TOKEN"
+  echo $AUTH_HEADER
 fi
 
 # Get the latest run ID before deployment
