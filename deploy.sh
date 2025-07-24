@@ -33,6 +33,7 @@ NEW_RUN_ID="$BASE_RUN_ID"
 while [ "$NEW_RUN_ID" == "$BASE_RUN_ID" ] || [ "$NEW_RUN_ID" == "null" ]; do
   sleep 1
   NEW_RUN_ID=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq '.workflow_runs[0].id')
+  echo "Current run ID: $NEW_RUN_ID"
 done
 
 # Fetch and open the new run's URL
