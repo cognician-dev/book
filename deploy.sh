@@ -19,8 +19,20 @@ if [ -n "$GITHUB_TOKEN" ]; then
   echo $AUTH_HEADER
 fi
 
-# Get the latest run ID before deployment
-BASE_RUN_ID=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq '.workflow_runs[0].id')
+# Get the latest run ID before deployment, with error handling
+RESPONSE=$(curl -s -H "$AUTH_HEADER" "$API_URL")
+
+if echo "$RESPONSE" | jq -e 'has("message")' > /dev/null; then
+  echo "❌ GitHub API error: $(echo "$RESPONSE" | jq -r '.message')"
+  exit 1
+fi
+
+BASE_RUN_ID=$(echo "$RESPONSE" | jq -r '.workflow_runs[0].id')
+
+if [ "$BASE_RUN_ID" = "null" ]; then
+  echo "❌ No previous workflow runs found."
+  exit 1
+fi
 
 echo "Latest pre-deploy run ID: $BASE_RUN_ID"
 
