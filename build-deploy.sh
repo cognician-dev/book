@@ -5,7 +5,9 @@ chmod +x build.sh deploy.sh
 ./build.sh
 ./deploy.sh
 
-sleep 1
+echo "Waiting for the deployment to kick off..."
+sleep 3
+
 REPO_URL=$(git remote get-url origin)
 REPO=$(echo "$REPO_URL" | sed -E 's#(git@|https://)([^:/]+)[:/]([^/]+/[^.]+)(\.git)?#\3#')
 
