@@ -7,7 +7,7 @@ logo: logo.png
 
 html:
   extra_css:
-    - theme.css
+    - custom.css
   static_path:
   - _static
 
