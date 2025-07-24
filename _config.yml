@@ -6,10 +6,10 @@ author: The Jupyter Book Community
 logo: logo.png
 
 html:
+  static_path:
+    - _static
   extra_css:
     - custom.css
-  static_path:
-  - _static
 
 
 # Exclude draft/sample notebooks from the build
