@@ -32,7 +32,7 @@ echo "Waiting for the new deployment run to appear..."
 # Poll until a new run is detected
 NEW_RUN_ID="$BASE_RUN_ID"
 while [ "$NEW_RUN_ID" == "$BASE_RUN_ID" ] || [ "$NEW_RUN_ID" == "null" ]; do
-  sleep 1
+  sleep 3
   NEW_RUN_ID=$(curl -s -H "$AUTH_HEADER" "$API_URL" | jq '.workflow_runs[0].id')
   echo "Current run ID: $NEW_RUN_ID"
 done
