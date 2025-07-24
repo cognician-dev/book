@@ -5,6 +5,11 @@ title: My sample book
 author: The Jupyter Book Community
 logo: logo.png
 
+# Exclude draft/sample notebooks from the build
+exclude_patterns:
+  - 'drafts/*'
+  - 'samples/*'
+  
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
