@@ -12,5 +12,5 @@ for i in {1..5}; do
   echo -n "."
 done
 
-echo -e "\n Opening the latest workflow in the browser."
+echo -e "\nOpening the latest workflow in the browser."
 gh run list --branch gh-pages --limit 1 --json url --jq '.[0].url' | xargs xdg-open
