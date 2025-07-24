@@ -4,6 +4,7 @@
 title: cognician
 author: cognician
 logo: logo.png
+copyright: "2025"
 
 html:
   static_path:
