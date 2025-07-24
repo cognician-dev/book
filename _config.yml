@@ -8,6 +8,8 @@ logo: logo.png
 html:
   extra_css:
     - theme.css
+  static_path:
+  - _static
 
 
 # Exclude draft/sample notebooks from the build
