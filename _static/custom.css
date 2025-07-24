@@ -1,5 +1,5 @@
 /* Change monospace font globally */
-code, .code, .highlight pre, .highlight code, .literal-block {
+body, body *{
   font-family: "Lucida Console", monospace !important;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
 }
