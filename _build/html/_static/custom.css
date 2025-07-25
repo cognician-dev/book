@@ -1,5 +1,8 @@
 /* Change monospace font globally */
-body, body *{
+h1, h1 *{
   font-family: "Lucida Console", monospace !important;
-  /* font-size: 0.9rem; */
+}
+
+p, p *{
+  font-family: "Baskerville", serif !important;
 }

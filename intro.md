@@ -1,8 +1,8 @@
-# veil
+# cognician
 
-My name is Ian. I'm writing to you from beyond a veil of ignorance.
+We are a data science and engineering collective. 
 
-I intend to replace this post eventually with a more comprehensive introduction and sample my works, but for today, the veil remains in place.
+A more comprehensive introduction and work sample will be deployed here soon, but for now the veil remains in place.
 
 ```{tableofcontents}
 ```
