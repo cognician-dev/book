@@ -3,6 +3,11 @@ h1, h1 *{
   font-family: "Lucida Console", monospace !important;
 }
 
+/* Change serif font globally */
 p, p *{
   font-family: "Baskerville", serif !important;
+}
+
+footer {
+  font-family: "Consolas", serif !important;
 }
