@@ -1,10 +1,8 @@
-# Markdown Files
+# contact
 
-Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
-in regular markdown files (`.md`), you'll write in the same flavor of markdown
-called **MyST Markdown**.
-This is a simple file to help you get started and show off some syntax.
+Email us at [hello@cognician.dev](mailto:hello@cognician.dev)
 
+<!-- 
 ## What is MyST?
 
 MyST stands for "Markedly Structured Text". It
@@ -52,4 +50,5 @@ then the bibliography is inserted with:
 ## Learn more
 
 This is just a simple starter to get you started.
-You can learn a lot more at [jupyterbook.org](https://jupyterbook.org).
+You can learn a lot more at [jupyterbook.org](https://jupyterbook.org). 
+-->
