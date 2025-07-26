@@ -16,7 +16,8 @@
 .bd-sidebar-primary a,
 footer .component-author,
 footer .copyright,
-.prev-next-subtitle, .prev-next-title {
+.prev-next-subtitle, .prev-next-title,
+code {
   font-family: "Consolas", monospace !important;
   text-transform: lowercase !important;
 }
