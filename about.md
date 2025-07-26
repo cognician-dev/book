@@ -1,3 +1,5 @@
 # About us
 
-We're cognician, a data plumbing collective built to cut through the shit and get your data under control so it can yield true insight. We build robust, scalable database solutions and pipelines, analytical decision platforms that deliver real value to your operations, classical machine learning model deployments, and bleeding-edge agentic-AI applications. We run lean, engage root cause analysis directly with your stakeholders and knowledge silos to make certain of your confidence that whatever you're building is in the right direction, and execute quickly. Let’s get to work.
+We're cognician, a data plumbing collective built to cut through the shit and get your data under control so it can yield true insight. We build robust, scalable database solutions and pipelines, analytical decision platforms that deliver real value to your operations, classical machine learning model deployments, and bleeding-edge agentic-AI applications. 
+
+We run lean, engage root cause analysis directly with your stakeholders and knowledge silos to make certain of your confidence that whatever you're building is in the right direction, and execute quickly. Let’s get to work.
