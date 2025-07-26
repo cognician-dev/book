@@ -5,9 +5,9 @@
 
 
 .bd-article h1 {
-  /* .toctree-l1 a */
-  font-family: "Consolas", monospace !important;
+  font-family: "Berlin Sans MT Bold", sans-serif !important;
   text-transform: lowercase !important;
+  font-variant: small-caps;
   font-weight: 600 !important;
 }
 .bd-article h2, .bd-article h3, .bd-article h4, .bd-article h5, .bd-article h6 {
@@ -22,8 +22,7 @@ code, a {
 footer .component-author,
 footer .copyright,
 .prev-next-subtitle, .prev-next-title
-/* .bd-sidebar-primary a, */
-/* code, a  */
+.bd-sidebar-primary a, .toctree-l1 a
 {
   font-family: "Consolas", monospace !important;
   text-transform: lowercase !important;
