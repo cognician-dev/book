@@ -1,6 +1,6 @@
 # contact
 
-Email us at [hello@cognician.dev](mailto:hello@cognician.dev)
+Email us at [hello@cognician.dev](mailto:hello@cognician.dev).
 
 <!-- 
 ## What is MyST?
