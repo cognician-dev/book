@@ -1,0 +1,28 @@
+
+.bd-article p {
+  font-family: "Baskerville", serif !important;
+}
+
+
+.bd-article h1 {
+  font-family: "Lucida Console", monospace !important;
+  text-transform: lowercase !important;
+  font-weight: 600 !important;
+}
+.bd-article h2, .bd-article h3, .bd-article h4, .bd-article h5, .bd-article h6 {
+  font-family: "Baskerville", serif !important;
+}
+
+.bd-sidebar-primary a,
+footer .component-author,
+footer .copyright,
+.prev-next-subtitle, .prev-next-title {
+  font-family: "Consolas", monospace !important;
+  text-transform: lowercase !important;
+}
+
+.toctree-l1 a {
+  font-family: "Consolas", monospace !important;
+  text-transform: lowercase !important;
+  font-weight: 600 !important;
+}
