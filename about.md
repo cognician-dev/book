@@ -1,4 +1,3 @@
 # About us
 
-We're cognician, a data plumbing collective built to cut through the shit. We get your data under control so it can yield true insight. If you've got data screaming for attention, we’ll answer back. Let’s get to work.
-
+We're cognician, a data plumbing collective built to cut through the shit and get your data under control so it can yield true insight. We specialize in building robust, scalable data pipelines, and analytical platform solutions that deliver real value. We run lean, execute quickly, and engage directly with your stakeholders and knowledge silos to find and unclog the root causes of all your data woes so you can see the true potential. If you've got data screaming for attention, we’ll take the call. Let’s get to work.

@@ -5,6 +5,7 @@
 
 
 .bd-article h1 {
+  /* .toctree-l1 a */
   font-family: "Consolas", monospace !important;
   text-transform: lowercase !important;
   font-weight: 600 !important;
@@ -13,17 +14,19 @@
   font-family: "Baskerville", serif !important;
 }
 
-.bd-sidebar-primary a,
-footer .component-author,
-footer .copyright,
-.prev-next-subtitle, .prev-next-title,
-code {
+code, a {
   font-family: "Consolas", monospace !important;
-  text-transform: lowercase !important;
+  /* text-transform: lowercase !important; */
 }
 
-.toctree-l1 a {
+footer .component-author,
+footer .copyright,
+.prev-next-subtitle, .prev-next-title
+/* .bd-sidebar-primary a, */
+/* code, a  */
+{
   font-family: "Consolas", monospace !important;
   text-transform: lowercase !important;
-  font-weight: 600 !important;
+  /* font-weight: 600 !important;  */
+
 }
