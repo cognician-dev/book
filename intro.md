@@ -1,4 +1,4 @@
-# cognician
+# About us
 
 We are a data science and engineering collective. 
 

@@ -5,7 +5,7 @@
 
 
 .bd-article h1 {
-  font-family: "Lucida Console", monospace !important;
+  font-family: "Consolas", monospace !important;
   text-transform: lowercase !important;
   font-weight: 600 !important;
 }
