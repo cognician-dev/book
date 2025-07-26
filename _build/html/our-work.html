@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; cognician</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>our work &#8212; cognician</title>
   
   
   
@@ -57,9 +58,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'our-work';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="contact" href="contact.html" />
+    <link rel="prev" title="cognician" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,8 +180,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="our-work.html">our work</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">our work</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">contact</a></li>
 </ul>
 
@@ -253,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Four-work.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -265,6 +266,54 @@
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/our-work.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -317,7 +366,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>our work</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -331,13 +380,80 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="our-work">
+<h1>our work<a class="headerlink" href="#our-work" title="Link to this heading">#</a></h1>
+<p>A more comprehensive work sample will be deployed here soon, but for now the veil remains in place.</p>
+<!-- 
+## What is MyST?
 
-<h1 id="index">Index</h1>
+MyST stands for "Markedly Structured Text". It
+is a slight variation on a flavor of markdown called "CommonMark" markdown,
+with small syntax extensions to allow you to write **roles** and **directives**
+in the Sphinx ecosystem.
 
-<div class="genindex-jumpbox">
- 
-</div>
+For more about MyST, see [the MyST Markdown Overview](https://jupyterbook.org/content/myst.html).
 
+## Sample Roles and Directives
+
+Roles and directives are two of the most powerful tools in Jupyter Book. They
+are like functions, but written in a markup language. They both
+serve a similar purpose, but **roles are written in one line**, whereas
+**directives span many lines**. They both accept different kinds of inputs,
+and what they do with those inputs depends on the specific role or directive
+that is being called.
+
+Here is a "note" directive:
+
+```{note}
+Here is a note
+```
+
+It will be rendered in a special box when you build your book.
+
+Here is an inline directive to refer to a document: {doc}`intro`.
+
+
+## Citations
+
+You can also cite references that are stored in a `bibtex` file. For example,
+the following syntax: `` {cite}`holdgraf_evidence_2014` `` will render like
+this: {cite}`holdgraf_evidence_2014`.
+
+Moreover, you can insert a bibliography into your page with this syntax:
+The `{bibliography}` directive must be used for all the `{cite}` roles to
+render properly.
+For example, if the references for your book are stored in `references.bib`,
+then the bibliography is inserted with:
+
+```{bibliography}
+```
+
+## Learn more
+
+This is just a simple starter to get you started.
+You can learn a lot more at [jupyterbook.org](https://jupyterbook.org). 
+-->
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -349,6 +465,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">cognician</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="contact.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">contact</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
