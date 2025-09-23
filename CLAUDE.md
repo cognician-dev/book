@@ -62,35 +62,46 @@ jb build .
 
 #### Code Quality
 ```bash
-# Run pre-commit hooks manually
+# Run pre-commit hooks manually (uses Ruff for formatting and linting)
 pre-commit run --all-files
 
-# Format code with black
-black .
+# Update pre-commit hooks to latest versions
+pre-commit autoupdate
 
-# Sort imports
-isort .
-
-# Lint with flake8
-flake8 .
+# Manual Ruff usage (if needed)
+ruff check --fix .  # Lint and auto-fix
+ruff format .       # Format code
 ```
 
 ## Content Management
 
 - Main content files are in the root directory
-- `drafts/` and `samples/` directories are excluded from builds via `_config.yml`
+- **Excluded from builds** (via `_config.yml`):
+  - `drafts/` - Draft content directory
+  - `samples/` - Sample notebooks directory
+  - `CLAUDE.md` - Internal development documentation
 - The book is configured to force re-execution of notebooks on each build
 - Logo file: `logo-t-a.png`
 - Bibliography: `references.bib`
 
 ## Deployment
 
-- **Production**: Automatic deployment to GitHub Pages via `.github/workflows/build-deploy.yml`
-  - Triggers on pushes to `main` or `master` branches
-  - Uses Python 3.11 and caches dependencies and executed notebooks
-- **PR Validation**: Automated build validation via `.github/workflows/validate.yml`
-  - Runs on all pull requests to ensure builds succeed
-  - Prevents broken builds from being merged
+### Production Environment
+- **URL**: https://cognician-dev.github.io/book/
+- **Workflow**: `.github/workflows/build-deploy.yml`
+- **Trigger**: Pushes to `main` branch
+- **Features**: Uses Python 3.11, caches dependencies and executed notebooks
+
+### Staging Environment
+- **URL**: https://cognician-dev.github.io/book/dev/
+- **Workflow**: `.github/workflows/deploy-dev.yml`
+- **Trigger**: Pushes to `dev` branch
+- **Purpose**: Test changes before promoting to production
+
+### Build Validation
+- **Workflow**: `.github/workflows/validate.yml`
+- **Triggers**: Pull requests to `main`/`dev` branches, pushes to `dev`
+- **Purpose**: Ensures builds succeed before merging
 
 ## Development Workflow
 
@@ -110,3 +121,4 @@ flake8 .
 - No traditional package.json or similar - this is a documentation site, not a web application
 - The `_build/` directory contains generated files and should not be edited directly
 - Static assets go in `_static/` directory
+- always update claude.md before committing
