@@ -114,7 +114,16 @@ ruff format .       # Format code
 
 ### Branch Strategy
 - `dev` - Development branch for testing changes before production
-- `main` - Production branch for live site
+- `main` - Production branch for live site (protected)
+
+### Branch Protection
+The `main` branch is protected with the following rules:
+- **Pull Request Required**: Direct pushes to main are blocked
+- **Status Check Required**: "Validate Build" workflow must pass
+- **Review Required**: At least 1 approving review needed
+- **Up-to-date Branches**: Must be current with main before merge
+- **No Force Push**: History cannot be rewritten
+- **Stale Review Dismissal**: New commits dismiss previous approvals
 
 ## File Structure Notes
 
