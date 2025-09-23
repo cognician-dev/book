@@ -2,7 +2,9 @@ name: Validate Build
 
 on:
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, dev ]
+  push:
+    branches: [ dev ]
   workflow_dispatch:
 
 jobs:

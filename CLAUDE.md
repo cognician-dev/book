@@ -95,10 +95,15 @@ flake8 .
 ## Development Workflow
 
 1. **Setup**: Install dependencies and pre-commit hooks
-2. **Development**: Make changes to content files
+2. **Development**: Work on the `dev` branch for testing
 3. **Quality**: Pre-commit hooks automatically run on commit
-4. **PR**: Create pull request - build validation runs automatically
-5. **Deploy**: Merge to main triggers automatic deployment
+4. **Dev Deploy**: Push to `dev` branch triggers deployment to staging environment
+5. **PR**: Create pull request from `dev` to `main` - build validation runs automatically
+6. **Production Deploy**: Merge to `main` triggers automatic deployment to production
+
+### Branch Strategy
+- `dev` - Development branch for testing changes before production
+- `main` - Production branch for live site
 
 ## File Structure Notes
 

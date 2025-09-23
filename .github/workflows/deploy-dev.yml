@@ -1,0 +1,63 @@
+name: Deploy Dev Branch
+
+# Deploy dev branch to GitHub Pages staging environment
+on:
+  push:
+    branches:
+    - dev
+
+# This job installs dependencies, builds the book, and pushes it to gh-pages-dev
+jobs:
+  deploy-dev:
+    environment:
+      name: github-pages-dev
+      url: https://cognician-dev.github.io/book/dev
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+
+    # Install dependencies
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: pip # Implicitly uses requirements.txt for cache key
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    # Cache executed notebooks between runs
+    - name: Cache executed notebooks
+      uses: actions/cache@v4
+      with:
+        path: _build/.jupyter_cache
+        key: jupyter-book-cache-dev-${{ hashFiles('requirements.txt') }}
+
+    # Build the book
+    - name: Build the book
+      run: |
+        jupyter-book clean --all .
+        jupyter-book build . --builder=html
+
+    # Create dev subdirectory structure for GitHub Pages
+    - name: Prepare dev deployment
+      run: |
+        mkdir -p _deploy/dev
+        cp -r _build/html/* _deploy/dev/
+        # Create index.html that redirects to dev/
+        echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=dev/"></head><body>Redirecting to dev...</body></html>' > _deploy/index.html
+
+    # Upload the book's HTML as an artifact
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: "_deploy"
+
+    # Deploy the book's HTML to GitHub Pages
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
