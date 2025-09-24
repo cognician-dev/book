@@ -42,8 +42,8 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book clean --all .
-        jupyter-book build . --builder=html
+        uv run jupyter-book clean --all .
+        uv run jupyter-book build . --builder=html
 
     # Create dev subdirectory structure for GitHub Pages
     - name: Prepare dev deployment
