@@ -17,55 +17,39 @@ This is a Jupyter Book project for cognician, a data plumbing collective. The re
 - **Configuration**:
   - `_config.yml` - Main Jupyter Book configuration
   - `_toc.yml` - Table of contents structure
-  - `requirements.txt` - Python dependencies
+  - `pyproject.toml` - Python dependencies managed by uv
+  - `uv.lock` - Locked dependency versions
 
 ## Common Commands
 
-### Building the Book
+All development tasks are managed through a Makefile:
+
 ```bash
-# Clean and build (recommended)
-./build.sh
+# See all available commands
+make help
 
-# Or manually:
-jb clean --all .
-jb build .
+# Initial setup
+make install    # Install dependencies with uv and set up pre-commit hooks
 
-# Local build with permissions fix
-./build-local.sh
+# Development workflow
+make build      # Clean and build the book
+make dev        # Build and open in browser
+make open       # Open built book in browser
+
+# Code quality
+make lint       # Run pre-commit hooks manually
 ```
 
-### Development
-
-#### Initial Setup
+### Manual Commands (if needed)
 ```bash
-# Install production dependencies
-pip install -r requirements.txt
-
-# Install development dependencies (optional)
-pip install -r requirements-dev.txt
-
-# Set up pre-commit hooks (recommended)
-pre-commit install
-```
-
-#### Local Development
-```bash
-# Build the book locally
-./build.sh
-
-# Or manually:
+# Direct Jupyter Book commands
 jb clean --all .
 jb build .
 
 # The built book will be in _build/html/
-```
 
-#### Code Quality
-```bash
-# Run pre-commit hooks manually (uses Ruff for formatting and linting)
+# Pre-commit management
 pre-commit run --all-files
-
-# Update pre-commit hooks to latest versions
 pre-commit autoupdate
 
 # Manual Ruff usage (if needed)
@@ -90,7 +74,7 @@ ruff format .       # Format code
 - **URL**: https://cognician-dev.github.io/book/
 - **Workflow**: `.github/workflows/build-deploy.yml`
 - **Trigger**: Pushes to `main` branch
-- **Features**: Uses Python 3.11, caches dependencies and executed notebooks
+- **Features**: Uses Python 3.11, uv for dependency management, caches dependencies and executed notebooks
 
 ### Staging Environment
 - **URL**: https://cognician-dev.github.io/book/dev/
@@ -125,9 +109,80 @@ The `main` branch is protected with the following rules:
 - **No Force Push**: History cannot be rewritten
 - **Stale Review Dismissal**: New commits dismiss previous approvals
 
+## Claude Code Productivity Systems
+
+This repository includes several Claude Code slash commands and subagents for productivity workflows:
+
+### Weekly Check-In Protocol
+
+The `/weekly-checkin` command will:
+
+1. Analyze project context to determine relevant metrics
+2. Ask for current values of those specific metrics
+3. Compare to previous data and generate visual analysis
+4. Save formatted report with insights and recommendations
+
+The system intelligently adapts to track what matters for this specific project.
+
+### Daily Check-In Protocol
+
+The `/daily-checkin` command provides:
+
+- Personal reflection prompts for well-being tracking
+- Mood and energy pattern analysis
+- Accomplishment tracking and momentum scoring
+- Visual trends and insights over time
+- Gentle, encouraging feedback for continuous growth
+
+Daily entries are saved in `journal/daily/` for long-term pattern recognition.
+
+### Newsletter Research Protocol
+
+The `/newsletter-research` command:
+
+- Analyzes competitor newsletters for trending topics
+- Identifies content gaps and opportunities
+- Writes complete newsletter drafts in your authentic voice
+- Creates compelling subject lines and natural CTAs
+- Saves research and drafts to organized folders
+
+### Brain Dump Analysis Protocol
+
+The `/brain-dump-analysis` command:
+
+- Extracts insights from stream-of-consciousness writing
+- Identifies recurring themes and hidden connections
+- Creates visual mind maps of thought patterns
+- Generates actionable items from chaotic thoughts
+- Provides both personal insights and content opportunities
+
+### Daily Brief Protocol
+
+The `/daily-brief` command:
+
+- Analyzes your files to identify personal interests
+- Curates recent news (last 7 days only) relevant to your work
+- Explains why each story matters to you specifically
+- Suggests actionable next steps from news insights
+- Saves personalized brief with verified publication dates
+
+### System Architecture
+
+- **Commands**: Stored in `.claude/commands/` as slash commands
+- **Subagents**: Specialized AI agents in `.claude/subagents/`
+- **Data Storage**:
+  - `metrics/` - Weekly check-in history and reports
+  - `journal/daily/` - Daily reflection entries and analysis
+  - `newsletter/` - Research insights and draft content
+  - `braindumps/` - Raw thoughts and extracted insights
+  - `daily-briefs/` - Personalized news briefings
+
+All systems are designed to intelligently adapt to your specific context and provide actionable insights rather than generic templates.
+
 ## File Structure Notes
 
-- No traditional package.json or similar - this is a documentation site, not a web application
+- Uses `pyproject.toml` and `uv.lock` for Python dependency management instead of requirements.txt
 - The `_build/` directory contains generated files and should not be edited directly
 - Static assets go in `_static/` directory
-- always update claude.md before committing
+- Virtual environment is in `.venv/` (managed by uv)
+- Always update CLAUDE.md before committing

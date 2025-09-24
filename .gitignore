@@ -6,6 +6,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# uv auto-generated package structure for documentation projects
+src/
+
 # Virtual environments
 .venv/
 venv/

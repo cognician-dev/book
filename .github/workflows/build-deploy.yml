@@ -18,7 +18,7 @@ on:
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
   deploy-book:
-    environment: 
+    environment:
       name: github-pages
     runs-on: ubuntu-latest
     permissions:
@@ -32,10 +32,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-        cache: pip # Implicitly uses requirements.txt for cache key
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: uv sync
 
     # (optional) Cache your executed notebooks between runs
     # if you have config:
@@ -45,12 +47,12 @@ jobs:
       uses: actions/cache@v4
       with:
         path: _build/.jupyter_cache
-        key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
+        key: jupyter-book-cache-${{ hashFiles('uv.lock') }}
 
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build .
+        uv run jupyter-book build .
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
