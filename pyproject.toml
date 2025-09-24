@@ -1,0 +1,18 @@
+[project]
+name = "cognician-book"
+version = "0.1.0"
+description = "Jupyter Book documentation site for Cognician data plumbing collective"
+authors = [
+    { name = "ian 🌿", email = "ianad@duck.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "jupyter-book>=1.0.4.post1",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.3",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+]

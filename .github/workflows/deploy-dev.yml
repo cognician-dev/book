@@ -25,17 +25,19 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-        cache: pip # Implicitly uses requirements.txt for cache key
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: uv sync
 
     # Cache executed notebooks between runs
     - name: Cache executed notebooks
       uses: actions/cache@v4
       with:
         path: _build/.jupyter_cache
-        key: jupyter-book-cache-dev-${{ hashFiles('requirements.txt') }}
+        key: jupyter-book-cache-dev-${{ hashFiles('uv.lock') }}
 
     # Build the book
     - name: Build the book
