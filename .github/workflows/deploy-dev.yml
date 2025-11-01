@@ -45,20 +45,22 @@ jobs:
     # Deploy to gh-pages branch in /dev subdirectory
     - name: Deploy to gh-pages dev directory
       run: |
-        # Configure git
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+        # Configure git globally for this workflow
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Clone gh-pages branch into a temporary directory
-        git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-clone || {
-          # If gh-pages doesn't exist, create it
+        # Try to clone gh-pages branch
+        if git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-clone 2>/dev/null; then
+          echo "Cloned existing gh-pages branch"
+        else
+          echo "gh-pages branch doesn't exist, creating new one"
           mkdir gh-pages-clone
           cd gh-pages-clone
           git init
           git checkout -b gh-pages
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           cd ..
-        }
+        fi
 
         # Update the dev directory
         cd gh-pages-clone
