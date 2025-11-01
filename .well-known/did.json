@@ -11,7 +11,7 @@
       "id": "did:web:cognician.dev#atproto",
       "type": "Multikey",
       "controller": "did:web:cognician.dev",
-      "publicKeyMultibase": "zQ3shunVEqmg9uZsZtQs1FvvXkEyfDGfFHaRvGRsyPRxwn4Pj"
+      "publicKeyMultibase": "zQ3shRogbgtkxCLH9GiuVMNKVCqSURezK9VYfnBLnRu8kBYF3"
     }
   ],
   "service": [
