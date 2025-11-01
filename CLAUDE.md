@@ -80,6 +80,10 @@ ruff format .       # Format code
   - `drafts/` - Draft content directory
   - `samples/` - Sample notebooks directory
   - `CLAUDE.md` - Internal development documentation
+  - `.venv/` - Python virtual environment
+  - `.claude/` - Claude Code configuration
+  - `.well-known/` - DID and well-known resources (copied separately to gh-pages)
+  - `braindumps/`, `daily-briefs/`, `journal/`, `metrics/`, `newsletter/` - Personal productivity data
 - The book is configured to force re-execution of notebooks on each build
 - Logo file: `logo-t-a.png`
 - Bibliography: `references.bib`
@@ -96,6 +100,7 @@ ruff format .       # Format code
   - Uses Python 3.11, uv for dependency management
   - Caches dependencies and executed notebooks
   - Automatically creates CNAME and .nojekyll files
+  - Copies `.well-known/` directory for DID document (https://cognician.dev/.well-known/did.json)
 
 ### Development/Testing Workflow
 - **No staging deployment** - Test changes locally before deploying
@@ -120,28 +125,6 @@ ruff format .       # Format code
 - GitHub Pages only supports one deployment per repository
 - Custom domain (CNAME) applies to entire site, can't have separate staging URL
 - Best practice: Test locally, use PR validation, deploy to production after review
-
-## Development Workflow
-
-1. **Setup**: Install dependencies and pre-commit hooks
-2. **Development**: Work on the `dev` branch for testing
-3. **Quality**: Pre-commit hooks automatically run on commit
-4. **Dev Deploy**: Push to `dev` branch triggers deployment to staging environment
-5. **PR**: Create pull request from `dev` to `main` - build validation runs automatically
-6. **Production Deploy**: Merge to `main` triggers automatic deployment to production
-
-### Branch Strategy
-- `dev` - Development branch for testing changes before production
-- `main` - Production branch for live site (protected)
-
-### Branch Protection
-The `main` branch is protected with the following rules:
-- **Pull Request Required**: Direct pushes to main are blocked
-- **Status Check Required**: "Validate Build" workflow must pass
-- **Review Required**: At least 1 approving review needed
-- **Up-to-date Branches**: Must be current with main before merge
-- **No Force Push**: History cannot be rewritten
-- **Stale Review Dismissal**: New commits dismiss previous approvals
 
 ## Claude Code Productivity Systems
 
