@@ -18,14 +18,13 @@ on:
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
   deploy-book:
-    environment:
-      name: github-pages
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
+      contents: write
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for all branches
 
     # Install dependencies
     - name: Set up Python 3.11
@@ -54,13 +53,38 @@ jobs:
       run: |
         uv run jupyter-book build .
 
-    # Upload the book's HTML as an artifact
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
-      with:
-        path: "_build/html"
+    # Deploy to gh-pages branch root directory
+    - name: Deploy to gh-pages root directory
+      run: |
+        # Configure git globally for this workflow
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-    # Deploy the book's HTML to GitHub Pages
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+        # Try to clone gh-pages branch
+        if git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-clone 2>/dev/null; then
+          echo "Cloned existing gh-pages branch"
+        else
+          echo "gh-pages branch doesn't exist, creating new one"
+          mkdir gh-pages-clone
+          cd gh-pages-clone
+          git init
+          git checkout -b gh-pages
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          cd ..
+        fi
+
+        # Update the root directory (preserve dev/ if it exists)
+        cd gh-pages-clone
+        # Remove all files except dev/ directory
+        find . -maxdepth 1 ! -name 'dev' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
+        # Copy new build to root
+        cp -r ../_build/html/* .
+
+        # Commit and push changes
+        git add .
+        if git diff --staged --quiet; then
+          echo "No changes to deploy"
+        else
+          git commit -m "Deploy main branch to gh-pages root [skip ci]"
+          git push origin gh-pages
+        fi
