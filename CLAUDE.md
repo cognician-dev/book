@@ -83,21 +83,50 @@ ruff format .       # Format code
 ## Deployment
 
 ### Production Environment
-- **URL**: https://cognician-dev.github.io/book/
+- **URL**: https://cognician.dev/ (custom domain via CNAME)
+- **Fallback URL**: https://cognician-dev.github.io/book/
 - **Workflow**: `.github/workflows/build-deploy.yml`
 - **Trigger**: Pushes to `main` branch
-- **Features**: Uses Python 3.11, uv for dependency management, caches dependencies and executed notebooks
+- **Method**: Builds Jupyter Book, pushes to `gh-pages` root
+- **Features**:
+  - Uses Python 3.11, uv for dependency management
+  - Caches dependencies and executed notebooks
+  - Automatically creates CNAME and .nojekyll files
 
-### Staging Environment
-- **URL**: https://cognician-dev.github.io/book/dev/
+### Staging Environment (Current Limitation)
+- **URL**: https://cognician.dev/dev/ (on production domain - not ideal)
 - **Workflow**: `.github/workflows/deploy-dev.yml`
 - **Trigger**: Pushes to `dev` branch
+- **Method**: Builds Jupyter Book, pushes to `gh-pages/dev/` subdirectory
 - **Purpose**: Test changes before promoting to production
+- **Note**: Staging is publicly accessible on production domain due to GitHub Pages limitations
 
 ### Build Validation
 - **Workflow**: `.github/workflows/validate.yml`
 - **Triggers**: Pull requests to `main`/`dev` branches, pushes to `dev`
 - **Purpose**: Ensures builds succeed before merging
+
+### Deployment Architecture Notes
+
+**GitHub Pages Limitations:**
+- Only supports one deployment per repository
+- Custom domain (CNAME) applies to entire site, not selective paths
+- Cannot have staging on separate domain (e.g., staging.cognician.dev)
+- Artifact-based deployment (`deploy-pages` action) only works from `main` branch
+
+**Why gh-pages branch approach:**
+- Allows both production (root) and staging (/dev/) deployments
+- Both workflows push to the same `gh-pages` branch in different directories
+- Production preserves `/dev/` directory, dev preserves root files
+
+**Critical files in gh-pages:**
+- `CNAME` - Custom domain configuration (created by workflow)
+- `.nojekyll` - Prevents Jekyll from processing files (critical for _static, _images)
+
+**Future Options for Better Staging:**
+- Use Cloudflare Pages, Netlify, or Vercel for dev branch (separate service)
+- Create separate repository for staging (complex)
+- Remove automatic dev deployment, test locally only (recommended)
 
 ## Development Workflow
 
