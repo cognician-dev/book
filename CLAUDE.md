@@ -11,10 +11,15 @@ This is a Jupyter Book project for cognician, a data plumbing collective. The re
 ### Branch Strategy
 
 - **`main`**: Production source code - deployed automatically to https://cognician.dev
-- **`dev`**: Development branch - test locally, merge to main via PR when ready
+- **Feature branches**: For larger changes, create feature branches and merge via PR
 - **`gh-pages`**: Deployment artifacts ONLY (auto-generated, never edit manually)
   - Contains static HTML/CSS/JS built from main branch
   - Serves the production site at https://cognician.dev
+
+**Workflow:**
+- Small updates: Work directly on `main` branch, push to deploy
+- Larger changes: Create feature branch → PR to main → merge to deploy
+- Test locally with `make dev` before pushing
 
 ### Build System
 
@@ -93,10 +98,12 @@ ruff format .       # Format code
   - Automatically creates CNAME and .nojekyll files
 
 ### Development/Testing Workflow
-- **No automatic staging deployment** - Test changes locally before merging
+- **No staging deployment** - Test changes locally before deploying
 - **Local testing**: Use `make dev` to build and preview locally
 - **Validation**: `.github/workflows/validate.yml` runs on PRs to ensure builds succeed
-- **Deployment**: Create PR from `dev` to `main`, merge to deploy to production
+- **Deployment**:
+  - Small updates: Push directly to `main`
+  - Larger changes: Create feature branch → PR to main → merge to deploy
 
 ### Deployment Architecture Notes
 
