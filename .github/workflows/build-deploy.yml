@@ -73,10 +73,10 @@ jobs:
           cd ..
         fi
 
-        # Update the root directory (preserve dev/ if it exists)
+        # Update the root directory
         cd gh-pages-clone
-        # Remove all files except dev/ directory, CNAME, and .nojekyll
-        find . -maxdepth 1 ! -name 'dev' ! -name 'CNAME' ! -name '.nojekyll' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
+        # Remove all files except CNAME and .nojekyll
+        find . -maxdepth 1 ! -name 'CNAME' ! -name '.nojekyll' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
         # Copy new build to root
         cp -r ../_build/html/* .
 

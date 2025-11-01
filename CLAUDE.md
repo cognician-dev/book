@@ -10,12 +10,11 @@ This is a Jupyter Book project for cognician, a data plumbing collective. The re
 
 ### Branch Strategy
 
-- **`main`**: Production source code - deployed automatically to root of site
-- **`dev`**: Development/staging source - deployed automatically to `/dev/` subdirectory
+- **`main`**: Production source code - deployed automatically to https://cognician.dev
+- **`dev`**: Development branch - test locally, merge to main via PR when ready
 - **`gh-pages`**: Deployment artifacts ONLY (auto-generated, never edit manually)
-  - Contains static HTML/CSS/JS built from source branches
-  - `main` branch builds deploy to root: https://cognician-dev.github.io/book/
-  - `dev` branch builds deploy to `/dev/`: https://cognician-dev.github.io/book/dev/
+  - Contains static HTML/CSS/JS built from main branch
+  - Serves the production site at https://cognician.dev
 
 ### Build System
 
@@ -87,46 +86,33 @@ ruff format .       # Format code
 - **Fallback URL**: https://cognician-dev.github.io/book/
 - **Workflow**: `.github/workflows/build-deploy.yml`
 - **Trigger**: Pushes to `main` branch
-- **Method**: Builds Jupyter Book, pushes to `gh-pages` root
+- **Method**: Builds Jupyter Book, pushes to `gh-pages` branch
 - **Features**:
   - Uses Python 3.11, uv for dependency management
   - Caches dependencies and executed notebooks
   - Automatically creates CNAME and .nojekyll files
 
-### Staging Environment (Current Limitation)
-- **URL**: https://cognician.dev/dev/ (on production domain - not ideal)
-- **Workflow**: `.github/workflows/deploy-dev.yml`
-- **Trigger**: Pushes to `dev` branch
-- **Method**: Builds Jupyter Book, pushes to `gh-pages/dev/` subdirectory
-- **Purpose**: Test changes before promoting to production
-- **Note**: Staging is publicly accessible on production domain due to GitHub Pages limitations
-
-### Build Validation
-- **Workflow**: `.github/workflows/validate.yml`
-- **Triggers**: Pull requests to `main`/`dev` branches, pushes to `dev`
-- **Purpose**: Ensures builds succeed before merging
+### Development/Testing Workflow
+- **No automatic staging deployment** - Test changes locally before merging
+- **Local testing**: Use `make dev` to build and preview locally
+- **Validation**: `.github/workflows/validate.yml` runs on PRs to ensure builds succeed
+- **Deployment**: Create PR from `dev` to `main`, merge to deploy to production
 
 ### Deployment Architecture Notes
 
-**GitHub Pages Limitations:**
-- Only supports one deployment per repository
-- Custom domain (CNAME) applies to entire site, not selective paths
-- Cannot have staging on separate domain (e.g., staging.cognician.dev)
-- Artifact-based deployment (`deploy-pages` action) only works from `main` branch
-
 **Why gh-pages branch approach:**
-- Allows both production (root) and staging (/dev/) deployments
-- Both workflows push to the same `gh-pages` branch in different directories
-- Production preserves `/dev/` directory, dev preserves root files
+- Modern artifact-based deployment (`deploy-pages` action) only works from `main` branch
+- Manual gh-pages push gives us full control over what gets deployed
+- Simpler than managing multiple deployment methods
 
 **Critical files in gh-pages:**
-- `CNAME` - Custom domain configuration (created by workflow)
-- `.nojekyll` - Prevents Jekyll from processing files (critical for _static, _images)
+- `CNAME` - Custom domain configuration (automatically created by workflow)
+- `.nojekyll` - Prevents Jekyll from processing files (critical for _static, _images directories)
 
-**Future Options for Better Staging:**
-- Use Cloudflare Pages, Netlify, or Vercel for dev branch (separate service)
-- Create separate repository for staging (complex)
-- Remove automatic dev deployment, test locally only (recommended)
+**Why no staging environment:**
+- GitHub Pages only supports one deployment per repository
+- Custom domain (CNAME) applies to entire site, can't have separate staging URL
+- Best practice: Test locally, use PR validation, deploy to production after review
 
 ## Development Workflow
 
