@@ -9,16 +9,13 @@ on:
 # This job installs dependencies, builds the book, and pushes it to gh-pages-dev
 jobs:
   deploy-dev:
-    environment:
-      name: github-pages-dev
-      url: https://cognician-dev.github.io/book/dev
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
-      contents: read
+      contents: write
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for all branches
 
     # Install dependencies
     - name: Set up Python 3.11
@@ -45,21 +42,37 @@ jobs:
         uv run jupyter-book clean --all .
         uv run jupyter-book build . --builder=html
 
-    # Create dev subdirectory structure for GitHub Pages
-    - name: Prepare dev deployment
+    # Deploy to gh-pages branch in /dev subdirectory
+    - name: Deploy to gh-pages dev directory
       run: |
-        mkdir -p _deploy/dev
-        cp -r _build/html/* _deploy/dev/
-        # Create index.html that redirects to dev/
-        echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=dev/"></head><body>Redirecting to dev...</body></html>' > _deploy/index.html
+        # Configure git globally for this workflow
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-    # Upload the book's HTML as an artifact
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
-      with:
-        path: "_deploy"
+        # Try to clone gh-pages branch
+        if git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-clone 2>/dev/null; then
+          echo "Cloned existing gh-pages branch"
+        else
+          echo "gh-pages branch doesn't exist, creating new one"
+          mkdir gh-pages-clone
+          cd gh-pages-clone
+          git init
+          git checkout -b gh-pages
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          cd ..
+        fi
 
-    # Deploy the book's HTML to GitHub Pages
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+        # Update the dev directory
+        cd gh-pages-clone
+        rm -rf dev
+        mkdir -p dev
+        cp -r ../_build/html/* dev/
+
+        # Commit and push changes
+        git add dev
+        if git diff --staged --quiet; then
+          echo "No changes to deploy"
+        else
+          git commit -m "Deploy dev branch to gh-pages/dev [skip ci]"
+          git push origin gh-pages
+        fi
