@@ -75,10 +75,13 @@ jobs:
 
         # Update the root directory (preserve dev/ if it exists)
         cd gh-pages-clone
-        # Remove all files except dev/ directory
-        find . -maxdepth 1 ! -name 'dev' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
+        # Remove all files except dev/ directory and CNAME
+        find . -maxdepth 1 ! -name 'dev' ! -name 'CNAME' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
         # Copy new build to root
         cp -r ../_build/html/* .
+
+        # Add CNAME file for custom domain
+        echo "cognician.dev" > CNAME
 
         # Commit and push changes
         git add .
