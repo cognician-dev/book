@@ -68,8 +68,11 @@ jobs:
         mkdir -p dev
         cp -r ../_build/html/* dev/
 
+        # Add .nojekyll to prevent Jekyll processing (if not already present)
+        touch .nojekyll
+
         # Commit and push changes
-        git add dev
+        git add dev .nojekyll
         if git diff --staged --quiet; then
           echo "No changes to deploy"
         else
