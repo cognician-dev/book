@@ -75,8 +75,8 @@ jobs:
 
         # Update the root directory
         cd gh-pages-clone
-        # Remove all files except CNAME and .nojekyll
-        find . -maxdepth 1 ! -name 'CNAME' ! -name '.nojekyll' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
+        # Remove all files except CNAME, .nojekyll, and .well-known
+        find . -maxdepth 1 ! -name 'CNAME' ! -name '.nojekyll' ! -name '.well-known' ! -name '.' ! -name '..' ! -name '.git' -exec rm -rf {} +
         # Copy new build to root
         cp -r ../_build/html/* .
 
@@ -85,6 +85,11 @@ jobs:
 
         # Add .nojekyll to prevent Jekyll processing
         touch .nojekyll
+
+        # Copy .well-known directory for DID and other well-known resources
+        if [ -d ../.well-known ]; then
+          cp -r ../.well-known .
+        fi
 
         # Commit and push changes
         git add .
