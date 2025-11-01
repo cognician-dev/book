@@ -1,0 +1,31 @@
+
+.bd-article p {
+  font-family: "Baskerville", serif !important;
+}
+
+
+.bd-article h1 {
+  font-family: "Berlin Sans MT Bold", sans-serif !important;
+  text-transform: lowercase !important;
+  font-variant: small-caps;
+  font-weight: 600 !important;
+}
+.bd-article h2, .bd-article h3, .bd-article h4, .bd-article h5, .bd-article h6 {
+  font-family: "Baskerville", serif !important;
+}
+
+code, a {
+  font-family: "Consolas", monospace !important;
+  /* text-transform: lowercase !important; */
+}
+
+footer .component-author,
+footer .copyright,
+.prev-next-subtitle, .prev-next-title
+.bd-sidebar-primary a, .toctree-l1 a
+{
+  font-family: "Consolas", monospace !important;
+  text-transform: lowercase !important;
+  /* font-weight: 600 !important;  */
+
+}
