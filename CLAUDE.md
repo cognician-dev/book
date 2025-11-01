@@ -8,14 +8,26 @@ This is a Jupyter Book project for cognician, a data plumbing collective. The re
 
 ## Architecture
 
-- **Build System**: Uses Jupyter Book (`jb`) to convert Markdown files into a static HTML website
+### Branch Strategy
+
+- **`main`**: Production source code - deployed automatically to root of site
+- **`dev`**: Development/staging source - deployed automatically to `/dev/` subdirectory
+- **`gh-pages`**: Deployment artifacts ONLY (auto-generated, never edit manually)
+  - Contains static HTML/CSS/JS built from source branches
+  - `main` branch builds deploy to root: https://cognician-dev.github.io/book/
+  - `dev` branch builds deploy to `/dev/`: https://cognician-dev.github.io/book/dev/
+
+### Build System
+
+- **Build Tool**: Jupyter Book (`jb`) converts Markdown files into static HTML website
 - **Content Structure**:
   - `about.md` - Landing page with company description
   - `contact.md` - Contact information
   - `drafts/` - Draft content excluded from builds
   - `samples/` - Sample notebooks and content excluded from builds
+  - Personal directories (`.claude/`, `braindumps/`, `journal/`, `newsletter/`, etc.) - Excluded from builds
 - **Configuration**:
-  - `_config.yml` - Main Jupyter Book configuration
+  - `_config.yml` - Main Jupyter Book configuration (includes `exclude_patterns`)
   - `_toc.yml` - Table of contents structure
   - `pyproject.toml` - Python dependencies managed by uv
   - `uv.lock` - Locked dependency versions
