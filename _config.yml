@@ -11,6 +11,14 @@ exclude_patterns:
   - 'drafts/*'
   - 'samples/*'
   - 'CLAUDE.md'
+  - '.venv/*'
+  - '.venv'
+  - '.claude/*'
+  - 'braindumps/*'
+  - 'daily-briefs/*'
+  - 'journal/*'
+  - 'metrics/*'
+  - 'newsletter/*'
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
